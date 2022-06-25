@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domino
 {
-    public interface ITurnsPlayers<F>
+    public interface ITurnsPlayers<T, G, F>
     {
-        public void NextMove();
+        public void NextMove(IBoard<T, G> board);
+
+        public bool GetDirection();
 
         public F GetTurnsPlayers();
     }

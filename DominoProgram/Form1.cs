@@ -1,30 +1,41 @@
 using Domino;
 using MyDomino;
+using Constructor;
 
 namespace DominoProgram
 {
     public partial class DominoEngine : Form
     {
         MyDom myDom = new MyDom();
-              
-        IRules<TokenDom, (int, int)> rules;
+        
+        Rules rules_;
 
-        IPlayer<TokenDom, (int, int)> player_turn;
+        //IPlayer<TokenDom, (int, int)> player_turn;
+        Player player_turn_ = new Player();
 
-        public IPlayer<TokenDom, (int, int)>[] players;
+        //public IPlayer<TokenDom, (int, int)>[] players;
+        PlayerList players_ = new PlayerList();
 
         List<TokenDom> tokens;
 
-        IBoard<TokenDom, (int, int)> board;
+        //IBoard<TokenDom, (int, int)> board;
+        Board board_;
 
-        ITurnsPlayers<bool[]> turn;
+        //ITurnsPlayers<List<bool>> turn;
+        TurnsPlayers turn_;
 
-        ICreatingPlayers<TokenDom, (int, int)> creatingPlayers;
+        //ICreatingPlayers<TokenDom, (int, int)> creatingPlayers;
 
-        IStartGame<TokenDom, (int, int), bool[]> startGame;
+        //IStartGame<TokenDom, (int, int), List<bool>> startGame;
+        StartGame startGame_;
+
+        GameOver gameOver;
+
+        ValidMove validMove;
+
+        Winners winners;
 
         int totalTokensForPlayers;
-        int totalPlayers;
         int totalTokens;
 
         string p = "player";
@@ -37,21 +48,35 @@ namespace DominoProgram
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            TotalPlayers.Items.Add(4);
-            TotalPlayers.Items.Add(3);
-            TotalPlayers.Items.Add(2);
-            TotalPlayers.Items.Add(1);
+            for (int i = 6; i < 13; i++)
+                TotalTokens.Items.Add(i);
 
-            TotalTokens.Items.Add(6);
-            TotalTokens.Items.Add(9);
+            for (int i = 7; i < 16; i++)
+                TotalTokensForPlayer.Items.Add(i);
 
-            TotalTokensForPlayer.Items.Add(7);
-            TotalTokensForPlayer.Items.Add(8);
-            TotalTokensForPlayer.Items.Add(9);
-            TotalTokensForPlayer.Items.Add(10);
             lblGameOver.Text = "";
             btnStartGame.Text = "StartGame";
-            
+
+//------------------------------------------------
+
+            ComboRules.Items.Add("RulesStandar");
+
+            comboPlayers.Items.Add("PlayerRandom");
+            comboPlayers.Items.Add("PlayerBotaGorda");
+            comboPlayers.Items.Add("PlayerBotaGorda_Random");
+
+            comboNextTurn.Items.Add("TurnsPLayersStandar");
+            comboNextTurn.Items.Add("TurnsPlayersPassInverse");
+
+            comboGameOver.Items.Add("GameOverStandar");
+            comboGameOver.Items.Add("GameOverPass");
+
+            comboValidMove.Items.Add("ValidMoveStandard");
+            comboValidMove.Items.Add("ValidMoveDivisible");
+
+            comboWinners.Items.Add("WinnersStandard");
+            comboWinners.Items.Add("WinnersMaxPoints");
+            comboWinners.Items.Add("WinnersMinorDoble");
         }
 
 
@@ -60,17 +85,31 @@ namespace DominoProgram
         {
 
         }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Player player = new Player(comboPlayers.Text);
+            players_.players.Add(player.player);
+            btnDone.Enabled = true;
+            treePlayers.Nodes.Add($"{player.player} {players_.players.Count}");
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            btnAdd.Enabled = false;
+            btnDone.Enabled = false;
+        }
 
         private void play_butt_Click(object sender, EventArgs e)
         {
-            rules = myDom.DefineRules();
-
-            // Total of Players
-            if (int.TryParse(TotalPlayers.Text, out totalPlayers))
-            {
-                totalPlayers = int.Parse(TotalPlayers.Text);
-            }
-            else throw new Exception("Check the total of players");
+            rules_ = new Rules(ComboRules.Text);
+            board_ = new Board("");
+            turn_ = new TurnsPlayers(comboNextTurn.Text);            
+            for (int i = 0; i < players_.players.Count; i++)
+                turn_.turnsPlayers.GetTurnsPlayers().Add(false);
+            startGame_ = new StartGame("");
+            gameOver = new GameOver(comboGameOver.Text);
+            validMove = new ValidMove(comboValidMove.Text);
+            winners = new Winners(comboWinners.Text);
 
             // Total of Tokens for Players
             if (int.TryParse(TotalTokensForPlayer.Text, out totalTokensForPlayers))
@@ -79,46 +118,42 @@ namespace DominoProgram
             }
             else throw new Exception("Check the total of tokens for players");
 
-            creatingPlayers = myDom.CreatingPlayers();
-            players = creatingPlayers.InitializePlayers(players, totalPlayers);
-            for (int i = 0; i < players.Length; i++)
-            {
-                 treePlayers.Nodes.Add($"{players[i]}");
-
-            }
-
             // Total of Tokens
             if (int.TryParse(TotalTokens.Text, out totalTokens))
             {
                 totalTokens = int.Parse(TotalTokens.Text);
-                tokens = rules.Tokens(totalTokens);
+                tokens = rules_.rules.Tokens(totalTokens);
             }
             else throw new Exception("Check the total of tokens");
 
             // Repartir fichas
 
             distributeTokens.Enabled = true;
-            btnInitialitePlayersTokens.Enabled = false;
         }
 
         private void distributeTokens_Click(object sender, EventArgs e)
         {
-            rules.DistributeTokens(tokens, players, totalTokensForPlayers);
+            rules_.rules.DistributeTokens(tokens, players_.players, totalTokensForPlayers);
             distributeTokens.Enabled = false;
-            PlayersVisualUpdate(players, turn);
+            PlayersVisualUpdate(players_, turn_);
 
+            btnInitialitePlayersTokens.Enabled = false;
             btnStartGame.Enabled = btnStartGame.Visible = true;
+            btnDone.Enabled = false;
+            btnAdd.Enabled = false;
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
-            turn = myDom.TurnPlayers(players);
-            startGame = myDom.StartGame();
-            board = startGame.InitializateBoard(board);
-            lblActuallyTable.Text = $"ActuallyTable: {board.GetActuallyBoard()}";
-            startGame.PlayerToMove(players, turn);
+            //turn = myDom.TurnPlayers(players_.players);
 
-            PlayersVisualUpdate(players ,turn);
+
+            //startGame = myDom.StartGame();
+            board_.board = startGame_.startGame.InitializateBoard(board_.board);
+            lblActuallyTable.Text = $"ActuallyTable: {board_.board.GetActuallyBoard()}";
+            startGame_.startGame.PlayerToMove(players_.players, turn_.turnsPlayers);
+
+            PlayersVisualUpdate(players_ ,turn_);
 
             btnNextMove.Visible = true;
             btnNextMove.Enabled = true;
@@ -127,41 +162,41 @@ namespace DominoProgram
 
         private void bttnNextMove_Click(object sender, EventArgs e)
         {
-            if (rules.GameOver(board, players)) GameOver();
+            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();
 
-            if (rules.CanMove(board, player_turn))
+            if (validMove.validMove.CanMove(board_.board, player_turn_.player))
             {
-                var move = player_turn.Play(board, player_turn.GetHand());
-                player_turn.GetHand().Remove(move.Item1);
-                board.UpdateBoard(move);
-                lstMoves.Items.Add($"{move.Item1} {player_turn} {board.GetActuallyBoard()}");
-                lblActuallyTable.Text = board.GetActuallyBoard().ToString();
-                turn.NextMove();
-                PlayersVisualUpdate(players, turn);
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand());
+                player_turn_.player.GetHand().Remove(move.Item1);
+                board_.board.UpdateBoard(move);
+                lstMoves.Items.Add($"{move.Item1} {player_turn_.player}{players_.players.IndexOf(player_turn_.player) + 1} {board_.board.GetActuallyBoard()}");
+                lblActuallyTable.Text = board_.board.GetActuallyBoard().ToString();
+                turn_.turnsPlayers.NextMove(board_.board);
+                PlayersVisualUpdate(players_, turn_);
             }
 
             else
             {
-                var move = player_turn.Play(board, player_turn.GetHand());
-                board.UpdateBoard(move);
-                lstMoves.Items.Add($"pass  {player_turn} {lblActuallyTable.Text}");
-                turn.NextMove();
-                PlayersVisualUpdate(players, turn);
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand());
+                board_.board.UpdateBoard(move);
+                lstMoves.Items.Add($"pass  {player_turn_.player} {lblActuallyTable.Text}");
+                turn_.turnsPlayers.NextMove(board_.board);
+                PlayersVisualUpdate(players_, turn_);
             }
-
-            if (rules.GameOver(board, players)) GameOver();
+            
+            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();
         }
 
-        public void PlayersVisualUpdate(IPlayer<TokenDom, (int, int)>[] players, ITurnsPlayers<bool[]> turn)
+        public void PlayersVisualUpdate(PlayerList players, TurnsPlayers turn)
         {
-            for (int i = 0; i < players.Length; i++)
+            for (int i = 0; i < players.players.Count; i++)
             {
                 treePlayers.Nodes[i] = new TreeNode();
-                if (turn != null && turn.GetTurnsPlayers()[i] ) { treePlayers.Nodes[i].Text = $"{p} {i + 1} ({tok} {players[i].GetHand().Count}) playNow"; player_turn = players[i]; }
-                else treePlayers.Nodes[i].Text = $"{p} {i + 1} ({tok} {players[i].GetHand().Count})";
-                for (int j = 0; j < players[i].GetHand().Count; j++)
+                if (turn != null && turn.turnsPlayers.GetTurnsPlayers()[i] ) { treePlayers.Nodes[i].Text = $"{players.players[i]} {i + 1} ({tok} {players.players[i].GetHand().Count}) playNow"; player_turn_.player = players.players[i]; }
+                else treePlayers.Nodes[i].Text = $"{players.players[i]} {i + 1} ({tok} {players.players[i].GetHand().Count})";
+                for (int j = 0; j < players.players[i].GetHand().Count; j++)
                 {
-                    treePlayers.Nodes[i].Nodes.Add(players[i].GetHand()[j].ToString());
+                    treePlayers.Nodes[i].Nodes.Add(players.players[i].GetHand()[j].ToString());
                 }
             }
         }
@@ -170,14 +205,15 @@ namespace DominoProgram
         {
             btnStartGame.Text = "ResetGame";
             //btnStartGame.Enabled = true;
-            btnNextMove.Enabled = false;
-            IPlayer<TokenDom, (int, int)>[] wineers = rules.Winners(board, players);
+            btnNextMove.Enabled = false; 
+            List<IPlayer<TokenDom, (int, int)>> wineers = winners.winners.Winners(board_.board, players_.players);
 
             lblGameOver.Text += "TheWinner(s)Is(Are):";
-            for (int i = 0; i < wineers.Length; i++)
+            for (int i = 0; i < wineers.Count; i++)
             {
-                lblGameOver.Text += " " + wineers[i].ToString() ;
+                lblGameOver.Text += " " + wineers[i].ToString() + (i + 1) ;
             }
         }
+
     }
 }

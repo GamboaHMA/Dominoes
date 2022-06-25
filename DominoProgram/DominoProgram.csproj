@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Constructor\Constructor.csproj" />
     <ProjectReference Include="..\Domino\Domino.csproj" />
     <ProjectReference Include="..\MyDomino\MyDomino.csproj" />
   </ItemGroup>

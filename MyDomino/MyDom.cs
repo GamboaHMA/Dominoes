@@ -11,7 +11,7 @@ namespace MyDomino
     {
         public IRules<TokenDom, (int, int)> DefineRules()
         {
-            Rules rules = new Rules();
+            RulesStandard rules = new RulesStandard();
             return rules;
         }
 
@@ -21,15 +21,15 @@ namespace MyDomino
             return creating;
         }
 
-        public ITurnsPlayers<bool[]> TurnPlayers(IPlayer<TokenDom, (int, int)>[] players)
+        public ITurnsPlayers<TokenDom,(int, int),List<bool>> TurnPlayers(List<IPlayer<TokenDom, (int, int)>> players)
         {
-            TurnOfPlayer turn = new TurnOfPlayer(players);
+            TurnsPLayersStandard turn = new TurnsPLayersStandard();
             return turn;
         }
 
-        public IStartGame<TokenDom, (int, int), bool[]> StartGame()
+        public IStartGame<TokenDom, (int, int), List<bool>> StartGame()
         {
-            StartGame startGame = new StartGame();
+            StartGameStandard startGame = new StartGameStandard();
             return startGame;
         }
     }

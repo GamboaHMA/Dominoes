@@ -10,6 +10,6 @@ namespace Domino
     {
         public IBoard<T, G> InitializateBoard(IBoard<T, G> board);
 
-        public void PlayerToMove(IPlayer<T, G>[] players, ITurnsPlayers<F> turn);
+        public void PlayerToMove(List<IPlayer<T, G>> players, ITurnsPlayers<T, G, F> turn);
     }
 }
