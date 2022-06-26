@@ -95,10 +95,10 @@ namespace DominoProgram
 
         private void play_butt_Click(object sender, EventArgs e)
         {
-            rules_ = new Rules(ComboRules.Text);
-            board_ = new Board("");
-            turn_ = new TurnsPlayers(comboNextTurn.Text);            
-            for (int i = 0; i < players_.players.Count; i++)
+            rules_ = new Rules(ComboRules.Text);                   // se inicializa todo el conjunto de
+            board_ = new Board("");                                // clases con las que se va a trabajar
+            turn_ = new TurnsPlayers(comboNextTurn.Text);          // dependiendo de lo que el usuario 
+            for (int i = 0; i < players_.players.Count; i++)       // escogio en la interfaz
                 turn_.turnsPlayers.GetTurnsPlayers().Add(false);
             startGame_ = new StartGame("");
             gameOver = new GameOver(comboGameOver.Text);
@@ -127,9 +127,9 @@ namespace DominoProgram
 
         private void distributeTokens_Click(object sender, EventArgs e)
         {
-            rules_.rules.DistributeTokens(tokens, players_.players, totalTokensForPlayers);
+            rules_.rules.DistributeTokens(tokens, players_.players, totalTokensForPlayers); // se reparten las fichas
             distributeTokens.Enabled = false;
-            PlayersVisualUpdate(players_, turn_);
+            PlayersVisualUpdate(players_, turn_);                                           // se actualiza la informacion visual
 
             btnInitialitePlayersTokens.Enabled = false;
             btnStartGame.Enabled = btnStartGame.Visible = true;
@@ -141,13 +141,11 @@ namespace DominoProgram
         {
             //turn = myDom.TurnPlayers(players_.players);
 
+            board_.board = startGame_.startGame.InitializateBoard(board_.board);            // se inicializa la mesa
+            lblActuallyTable.Text = $"ActuallyTable: {board_.board.GetActuallyBoard()}";    
+            startGame_.startGame.PlayerToMove(players_.players, turn_.turnsPlayers);        // se defince que jugador comenzara a jugar
 
-            //startGame = myDom.StartGame();
-            board_.board = startGame_.startGame.InitializateBoard(board_.board);
-            lblActuallyTable.Text = $"ActuallyTable: {board_.board.GetActuallyBoard()}";
-            startGame_.startGame.PlayerToMove(players_.players, turn_.turnsPlayers);
-
-            PlayersVisualUpdate(players_ ,turn_);
+            PlayersVisualUpdate(players_ ,turn_);                                           // se actualiza la informacion visual 
 
             btnNextMove.Visible = true;
             btnNextMove.Enabled = true;
@@ -156,29 +154,29 @@ namespace DominoProgram
 
         private void bttnNextMove_Click(object sender, EventArgs e)
         {
-            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();
+            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();  // se varifica si el juego termino
 
-            if (validMove.validMove.CanMove(board_.board, player_turn_.player))
+            if (validMove.validMove.CanMove(board_.board, player_turn_.player))          // se verifica si el jugador tiene fichas validas para jugar
             {
-                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove);
-                player_turn_.player.GetHand().Remove(move.Item1);
-                board_.board.UpdateBoard(move);
-                lstMoves.Items.Add($"{move.Item1} {player_turn_.player}{players_.players.IndexOf(player_turn_.player) + 1} {board_.board.GetActuallyBoard()}");
-                lblActuallyTable.Text = board_.board.GetActuallyBoard().ToString();
-                turn_.turnsPlayers.NextMove(board_.board);
-                PlayersVisualUpdate(players_, turn_);
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove);      // se le pide la ficha que el jugador devolvera
+                player_turn_.player.GetHand().Remove(move.Item1);                                                           // se le elimina la ficha de la mano
+                board_.board.UpdateBoard(move);                                                                             // se actualiza la mesa con el valor devuelto por ".Play(...)"
+                lstMoves.Items.Add($"{move.Item1} {player_turn_.player}{players_.players.IndexOf(player_turn_.player) + 1} {board_.board.GetActuallyBoard()}"); 
+                lblActuallyTable.Text = board_.board.GetActuallyBoard().ToString();                             
+                turn_.turnsPlayers.NextMove(board_.board);                                                                  // se modifica el valor de la coleccion que nos dira a quien le toca jugar en la proxima jugada
+                PlayersVisualUpdate(players_, turn_);                       // se actualiza la informacion visual
             }
 
             else
             {
-                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove);
-                board_.board.UpdateBoard(move);
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove); // se le pide la ficha a jugar al jugador, en este caso devolvera null porque vimos que no tenia fichas validas en la mano
+                board_.board.UpdateBoard(move);                                                                        // se actualiza la mesa
                 lstMoves.Items.Add($"pass  {player_turn_.player} {lblActuallyTable.Text}");
                 turn_.turnsPlayers.NextMove(board_.board);
-                PlayersVisualUpdate(players_, turn_);
-            }
+                PlayersVisualUpdate(players_, turn_);                   // se actualiza la informacion visual
+            } 
             
-            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();
+            if (gameOver.gameOver.GameOver(board_.board, players_.players, (board, player) => validMove.validMove.CanMove(board, player))) GameOver();  // se comprueba si ya el juego termino
         }
 
         public void PlayersVisualUpdate(PlayerList players, TurnsPlayers turn)
@@ -195,7 +193,7 @@ namespace DominoProgram
             }
         }
 
-        public void GameOver()
+        public void GameOver()            // se encarga de plantear en la interfaz grafica que el juego haya terminado
         {
             btnStartGame.Text = "ResetGame";
             //btnStartGame.Enabled = true;
