@@ -48,6 +48,7 @@
             this.comboGameOver = new System.Windows.Forms.ComboBox();
             this.comboValidMove = new System.Windows.Forms.ComboBox();
             this.comboWinners = new System.Windows.Forms.ComboBox();
+            this.comboStartGame = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // ComboRules
@@ -266,6 +267,16 @@
             this.comboWinners.TabIndex = 25;
             this.comboWinners.Text = "Winners";
             // 
+            // comboStartGame
+            // 
+            this.comboStartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.comboStartGame.FormattingEnabled = true;
+            this.comboStartGame.Location = new System.Drawing.Point(444, 283);
+            this.comboStartGame.Name = "comboStartGame";
+            this.comboStartGame.Size = new System.Drawing.Size(121, 23);
+            this.comboStartGame.TabIndex = 26;
+            this.comboStartGame.Text = "StarGame";
+            // 
             // DominoEngine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -274,6 +285,7 @@
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.Color.Green;
             this.ClientSize = new System.Drawing.Size(732, 443);
+            this.Controls.Add(this.comboStartGame);
             this.Controls.Add(this.comboWinners);
             this.Controls.Add(this.comboValidMove);
             this.Controls.Add(this.comboGameOver);
@@ -328,5 +340,6 @@
         private ComboBox comboGameOver;
         private ComboBox comboValidMove;
         private ComboBox comboWinners;
+        private ComboBox comboStartGame;
     }
 }

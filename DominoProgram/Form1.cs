@@ -50,7 +50,10 @@ namespace DominoProgram
             lblGameOver.Text = "";
             btnStartGame.Text = "StartGame";
 
-//------------------------------------------------
+            //------------------------------------------------
+
+            comboStartGame.Items.Add("StartGameStandard");
+            comboStartGame.Items.Add("StartGameHigherHand");
 
             ComboRules.Items.Add("RulesStandar");
             ComboRules.Items.Add("RulesDistributeDobles");
@@ -100,7 +103,7 @@ namespace DominoProgram
             turn_ = new TurnsPlayers(comboNextTurn.Text);          // dependiendo de lo que el usuario 
             for (int i = 0; i < players_.players.Count; i++)       // escogio en la interfaz
                 turn_.turnsPlayers.GetTurnsPlayers().Add(false);
-            startGame_ = new StartGame("");
+            startGame_ = new StartGame(comboStartGame.Text);
             gameOver = new GameOver(comboGameOver.Text);
             validMove = new ValidMove(comboValidMove.Text);
             winners = new Winners(comboWinners.Text);

@@ -19,6 +19,9 @@ namespace Constructor
                 case "StartGameStandar":
                     startGame = new StartGameStandard();
                     break;
+                case "StartGameHigherHand":
+                    startGame = new StartGameHigherHand();
+                    break;
 
                 default:
                     startGame = new StartGameStandard();
