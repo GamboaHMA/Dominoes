@@ -8,7 +8,7 @@ namespace Domino
 {
     public interface IPlayer<T, G>
     {
-        public (T, int) Play(IBoard<T, G> board, List<T> hand);
+        public (T, int) Play(IBoard<T, G> board, List<T> hand, IValidMove<T, G> validMove);
 
         public (T, int) Euristic(IBoard<T, G> board, List<T> moves);
 

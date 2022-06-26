@@ -52,12 +52,12 @@ namespace MyDomino
             return winner;
         }
 
-        public (TokenDom, int) Play(IBoard<TokenDom, (int, int)> board, List<TokenDom> hand)
+        public (TokenDom, int) Play(IBoard<TokenDom, (int, int)> board, List<TokenDom> hand, IValidMove<TokenDom, (int, int)> validMove)
         {
             List<TokenDom> moves = new List<TokenDom>();
             foreach (TokenDom token in hand)
             {
-                if (rules.ValidMove(board, token)) moves.Add(token);
+                if (validMove.ValidMove(board, token)) moves.Add(token);
             }
 
             return Euristic(board, moves);

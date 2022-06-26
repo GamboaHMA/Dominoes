@@ -56,7 +56,7 @@
             this.ComboRules.CausesValidation = false;
             this.ComboRules.FormattingEnabled = true;
             this.ComboRules.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ComboRules.Location = new System.Drawing.Point(490, 55);
+            this.ComboRules.Location = new System.Drawing.Point(444, 56);
             this.ComboRules.Name = "ComboRules";
             this.ComboRules.Size = new System.Drawing.Size(121, 23);
             this.ComboRules.TabIndex = 18;
@@ -78,10 +78,10 @@
             this.TotalTokens.ForeColor = System.Drawing.SystemColors.WindowText;
             this.TotalTokens.ImeMode = System.Windows.Forms.ImeMode.On;
             this.TotalTokens.InterceptArrowKeys = false;
-            this.TotalTokens.Location = new System.Drawing.Point(630, 56);
+            this.TotalTokens.Location = new System.Drawing.Point(571, 55);
             this.TotalTokens.Name = "TotalTokens";
             this.TotalTokens.ReadOnly = true;
-            this.TotalTokens.Size = new System.Drawing.Size(90, 23);
+            this.TotalTokens.Size = new System.Drawing.Size(132, 23);
             this.TotalTokens.TabIndex = 5;
             this.TotalTokens.Text = "TotalTokens";
             this.TotalTokens.Wrap = true;
@@ -92,17 +92,17 @@
             this.TotalTokensForPlayer.ForeColor = System.Drawing.SystemColors.WindowText;
             this.TotalTokensForPlayer.ImeMode = System.Windows.Forms.ImeMode.On;
             this.TotalTokensForPlayer.InterceptArrowKeys = false;
-            this.TotalTokensForPlayer.Location = new System.Drawing.Point(630, 96);
+            this.TotalTokensForPlayer.Location = new System.Drawing.Point(571, 97);
             this.TotalTokensForPlayer.Name = "TotalTokensForPlayer";
             this.TotalTokensForPlayer.ReadOnly = true;
-            this.TotalTokensForPlayer.Size = new System.Drawing.Size(90, 23);
+            this.TotalTokensForPlayer.Size = new System.Drawing.Size(132, 23);
             this.TotalTokensForPlayer.TabIndex = 7;
             this.TotalTokensForPlayer.Text = "TotalTokensForPlayer";
             this.TotalTokensForPlayer.Wrap = true;
             // 
             // btnInitialitePlayersTokens
             // 
-            this.btnInitialitePlayersTokens.Location = new System.Drawing.Point(630, 185);
+            this.btnInitialitePlayersTokens.Location = new System.Drawing.Point(571, 185);
             this.btnInitialitePlayersTokens.Name = "btnInitialitePlayersTokens";
             this.btnInitialitePlayersTokens.Size = new System.Drawing.Size(90, 23);
             this.btnInitialitePlayersTokens.TabIndex = 8;
@@ -113,7 +113,7 @@
             // distributeTokens
             // 
             this.distributeTokens.Enabled = false;
-            this.distributeTokens.Location = new System.Drawing.Point(630, 232);
+            this.distributeTokens.Location = new System.Drawing.Point(571, 233);
             this.distributeTokens.Name = "distributeTokens";
             this.distributeTokens.Size = new System.Drawing.Size(90, 23);
             this.distributeTokens.TabIndex = 9;
@@ -126,7 +126,7 @@
             this.lstMoves.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lstMoves.FormattingEnabled = true;
             this.lstMoves.ItemHeight = 15;
-            this.lstMoves.Location = new System.Drawing.Point(292, 55);
+            this.lstMoves.Location = new System.Drawing.Point(270, 55);
             this.lstMoves.Name = "lstMoves";
             this.lstMoves.Size = new System.Drawing.Size(168, 319);
             this.lstMoves.TabIndex = 11;
@@ -156,7 +156,7 @@
             // btnStartGame
             // 
             this.btnStartGame.Enabled = false;
-            this.btnStartGame.Location = new System.Drawing.Point(630, 141);
+            this.btnStartGame.Location = new System.Drawing.Point(571, 141);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(90, 23);
             this.btnStartGame.TabIndex = 14;
@@ -186,7 +186,7 @@
             // btnNextMove
             // 
             this.btnNextMove.Enabled = false;
-            this.btnNextMove.Location = new System.Drawing.Point(630, 281);
+            this.btnNextMove.Location = new System.Drawing.Point(571, 282);
             this.btnNextMove.Name = "btnNextMove";
             this.btnNextMove.Size = new System.Drawing.Size(90, 23);
             this.btnNextMove.TabIndex = 17;
@@ -230,7 +230,7 @@
             // 
             this.comboNextTurn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.comboNextTurn.FormattingEnabled = true;
-            this.comboNextTurn.Location = new System.Drawing.Point(490, 96);
+            this.comboNextTurn.Location = new System.Drawing.Point(444, 96);
             this.comboNextTurn.Name = "comboNextTurn";
             this.comboNextTurn.Size = new System.Drawing.Size(121, 23);
             this.comboNextTurn.TabIndex = 22;
@@ -240,7 +240,7 @@
             // 
             this.comboGameOver.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.comboGameOver.FormattingEnabled = true;
-            this.comboGameOver.Location = new System.Drawing.Point(490, 142);
+            this.comboGameOver.Location = new System.Drawing.Point(444, 142);
             this.comboGameOver.Name = "comboGameOver";
             this.comboGameOver.Size = new System.Drawing.Size(121, 23);
             this.comboGameOver.TabIndex = 23;
@@ -250,7 +250,7 @@
             // 
             this.comboValidMove.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.comboValidMove.FormattingEnabled = true;
-            this.comboValidMove.Location = new System.Drawing.Point(490, 186);
+            this.comboValidMove.Location = new System.Drawing.Point(444, 185);
             this.comboValidMove.Name = "comboValidMove";
             this.comboValidMove.Size = new System.Drawing.Size(121, 23);
             this.comboValidMove.TabIndex = 24;
@@ -260,7 +260,7 @@
             // 
             this.comboWinners.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.comboWinners.FormattingEnabled = true;
-            this.comboWinners.Location = new System.Drawing.Point(490, 233);
+            this.comboWinners.Location = new System.Drawing.Point(444, 233);
             this.comboWinners.Name = "comboWinners";
             this.comboWinners.Size = new System.Drawing.Size(121, 23);
             this.comboWinners.TabIndex = 25;

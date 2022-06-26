@@ -10,23 +10,16 @@ namespace DominoProgram
         
         Rules rules_;
 
-        //IPlayer<TokenDom, (int, int)> player_turn;
         Player player_turn_ = new Player();
 
-        //public IPlayer<TokenDom, (int, int)>[] players;
         PlayerList players_ = new PlayerList();
 
         List<TokenDom> tokens;
 
-        //IBoard<TokenDom, (int, int)> board;
         Board board_;
 
-        //ITurnsPlayers<List<bool>> turn;
         TurnsPlayers turn_;
 
-        //ICreatingPlayers<TokenDom, (int, int)> creatingPlayers;
-
-        //IStartGame<TokenDom, (int, int), List<bool>> startGame;
         StartGame startGame_;
 
         GameOver gameOver;
@@ -60,6 +53,7 @@ namespace DominoProgram
 //------------------------------------------------
 
             ComboRules.Items.Add("RulesStandar");
+            ComboRules.Items.Add("RulesDistributeDobles");
 
             comboPlayers.Items.Add("PlayerRandom");
             comboPlayers.Items.Add("PlayerBotaGorda");
@@ -166,7 +160,7 @@ namespace DominoProgram
 
             if (validMove.validMove.CanMove(board_.board, player_turn_.player))
             {
-                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand());
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove);
                 player_turn_.player.GetHand().Remove(move.Item1);
                 board_.board.UpdateBoard(move);
                 lstMoves.Items.Add($"{move.Item1} {player_turn_.player}{players_.players.IndexOf(player_turn_.player) + 1} {board_.board.GetActuallyBoard()}");
@@ -177,7 +171,7 @@ namespace DominoProgram
 
             else
             {
-                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand());
+                var move = player_turn_.player.Play(board_.board, player_turn_.player.GetHand(), validMove.validMove);
                 board_.board.UpdateBoard(move);
                 lstMoves.Items.Add($"pass  {player_turn_.player} {lblActuallyTable.Text}");
                 turn_.turnsPlayers.NextMove(board_.board);

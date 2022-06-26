@@ -17,7 +17,11 @@ namespace Constructor
         {
             switch (item)
             {
-                case "RulesStandar": rules = new RulesStandard();
+                case "RulesStandar": 
+                    rules = new RulesStandard();
+                    break;
+                case "RulesDistributeDobles":
+                    rules = new RulesDistributeDobles();
                     break;
 
                 default:

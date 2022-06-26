@@ -15,7 +15,7 @@ namespace MyDomino
 
         public BoardStandard ()
         {
-            this.registrer = new List<TokenDom>();
+            registrer = new List<TokenDom>();
             actuallyBoard = (-1, -1);
         }
 

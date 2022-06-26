@@ -11,7 +11,6 @@ namespace MyDomino
     {
         public List<TokenDom> tokens;
         public bool winner;
-        RulesStandard rules = new RulesStandard();
         public string name { get; set; }
 
         public PlayerRandom(List<TokenDom> tokens, string name)
@@ -20,12 +19,12 @@ namespace MyDomino
             this.name = name;
         }
 
-        public (TokenDom, int) Play(IBoard<TokenDom, (int, int)> board, List<TokenDom> hand)
+        public (TokenDom, int) Play(IBoard<TokenDom, (int, int)> board, List<TokenDom> hand, IValidMove<TokenDom, (int, int)> validMove)
         {
             List<TokenDom> moves = new List<TokenDom>();
             foreach (TokenDom token in hand)
             {
-                if (rules.ValidMove(board, token)) moves.Add(token);
+                if (validMove.ValidMove(board, token)) moves.Add(token);
             }
 
             return Euristic(board, moves);
@@ -52,10 +51,10 @@ namespace MyDomino
 
             for (int i = 0; i < tokens.Count; i++)
             {
-                if (tokens[i].ToEquals(other.GetHand()[i])) continue;
+                if (other.GetHand().Contains(tokens[i])) continue;
                 else return false;
             }
-            return true;
+        return true;
         }
 
         public List<TokenDom> GetHand()
