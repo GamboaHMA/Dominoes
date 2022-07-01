@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domino", "Domino\Domino.csproj", "{4478EFEB-6E16-4C8A-BF39-7F034B8B6477}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DominoProgram", "DominoProgram\DominoProgram.csproj", "{107C1241-E80D-45BA-9E4B-E6317D251CE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDomino", "MyDomino\MyDomino.csproj", "{43A0E9F2-D5E0-4B58-B1E3-5438062A9AA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4478EFEB-6E16-4C8A-BF39-7F034B8B6477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4478EFEB-6E16-4C8A-BF39-7F034B8B6477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4478EFEB-6E16-4C8A-BF39-7F034B8B6477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4478EFEB-6E16-4C8A-BF39-7F034B8B6477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107C1241-E80D-45BA-9E4B-E6317D251CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107C1241-E80D-45BA-9E4B-E6317D251CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107C1241-E80D-45BA-9E4B-E6317D251CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107C1241-E80D-45BA-9E4B-E6317D251CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43A0E9F2-D5E0-4B58-B1E3-5438062A9AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43A0E9F2-D5E0-4B58-B1E3-5438062A9AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43A0E9F2-D5E0-4B58-B1E3-5438062A9AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43A0E9F2-D5E0-4B58-B1E3-5438062A9AA1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {75E7AFC8-28EC-4C30-9D97-944DBDE6350B}
+	EndGlobalSection
+EndGlobal
